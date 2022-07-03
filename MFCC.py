@@ -113,7 +113,11 @@ def lifter(cepstra, L=22):
     n = np.arange(ncoeff)
     lift = 1 + (L / 2.) * np.sin(np.pi * n / L)
     return lift * cepstra
-
+if __name__=="__main__":
+    (rate,sig) = wav.read(r"C:\Users\RmDeu\Desktop\University\ВКР\Распознавание голосовых команд\dataset\right\0c40e715_nohash_1.wav")
+    # wav file to mfcc
+    mfcc_feat = mfcc(signal=sig,samplerate=rate)
+    print(mfcc_feat)
 
 """if __name__=="__main__":
     calcDTW("0.wav")
