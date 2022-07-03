@@ -6,6 +6,7 @@ import scipy.io.wavfile as wav
 import json
 import numpy as np
 
+
 def dtw(x, y, dist):
     assert len(x)  # Report error while x is none
     assert len(y)
@@ -59,7 +60,7 @@ def calcDTW(filename):
     mfcc_test = mfcc(signal=sig_test, samplerate=rate_test)
 
     with open('words.txt', 'r') as words_list:
-        lines = words_list.readlines()
+        lines = words_list.read().splitlines()
     distances = dict.fromkeys(lines)
 
     for word in lines:
@@ -67,7 +68,8 @@ def calcDTW(filename):
         distances[word] = dist
     word = min(distances, key=distances.get)
     dist_test, cost_test, acc_test, path_test = dtw(data[word], mfcc_test, dist=lambda x, y: norm(x - y, ord=1))
-    result_test = np.empty((len(data[word]), 13))
-    for x in range(path_test[0].size):
+    result_test = np.zeros((len(data[word]), 13))
+    for x in range(path_test[0].size-1):
         result_test[path_test[0][x], :] = mfcc_test[x, :]
-    return result_test
+    return(result_test, word)
+

@@ -1,1 +1,15 @@
 bed
+bird
+cat
+dog
+down
+go
+happy
+left
+no
+off
+on
+right
+stop
+up
+yes
